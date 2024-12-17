@@ -1,16 +1,10 @@
-# myrefectly
+# Reflectly
 
-A new Flutter project.
+# Please watch a demo by clicking to this video
 
-## Getting Started
+[![Watch the video](https://img.youtube.com/vi/_Yjp-0Sbfto/0.jpg)](https://www.youtube.com/watch?v=_Yjp-0Sbfto&ab_channel=FLutterIntern)
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+> **Note:** The code is still a work in progress. I'll be updating it soon with more features and improvements. Stay tuned!
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
