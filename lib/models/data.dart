@@ -192,6 +192,6 @@ List<String> all_category() {
   ];
 }
 
-String server_root_url = "https://c721-113-185-50-139.ngrok-free.app";
+String server_root_url = "https://d628-2001-ee0-227-b567-fc0b-e1a7-b2b0-5ca6.ngrok-free.app";
 
 bool isHiveInitialized = false;
