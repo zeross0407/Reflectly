@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:myrefectly/help/route.dart';
 import 'package:myrefectly/notification/notification_schedule.dart';
-import 'package:myrefectly/start/init_viewmodel.dart';
-import 'package:myrefectly/start/root.dart';
+import 'package:myrefectly/intro/init_viewmodel.dart';
+import 'package:myrefectly/intro/root.dart';
 import 'package:provider/provider.dart';
 
 class InitPage extends StatefulWidget {

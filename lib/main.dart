@@ -8,7 +8,7 @@ import 'package:myrefectly/models/entity.dart';
 import 'package:myrefectly/models/entry.dart';
 import 'package:myrefectly/notification/notification_schedule.dart';
 import 'package:myrefectly/entries/entries_viewmodel.dart';
-import 'package:myrefectly/start/init.dart';
+import 'package:myrefectly/intro/init.dart';
 import 'package:myrefectly/repository/repository.dart';
 import 'package:myrefectly/navigation/navigation_viewmodel.dart';
 import 'package:provider/provider.dart';

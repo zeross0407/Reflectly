@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:myrefectly/help/route.dart';
-import 'package:myrefectly/start/root_viewmodel.dart';
+import 'package:myrefectly/intro/root_viewmodel.dart';
 import 'package:myrefectly/navigation/navigation.dart';
 import 'package:myrefectly/other/security.dart';
-import 'package:myrefectly/start/intro.dart';
+import 'package:myrefectly/intro/intro.dart';
 import 'package:provider/provider.dart';
 
 class ReflectlyApp extends StatefulWidget {

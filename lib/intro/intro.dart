@@ -9,7 +9,7 @@ import 'package:myrefectly/share/custominp.dart';
 import 'package:myrefectly/share_component/reflectly_face.dart';
 import 'package:myrefectly/help/color.dart';
 import 'package:myrefectly/share_component/text.dart';
-import 'package:myrefectly/start/intro_viewmodel.dart';
+import 'package:myrefectly/intro/intro_viewmodel.dart';
 import 'package:provider/provider.dart';
 
 class Intro_Page extends StatefulWidget {
