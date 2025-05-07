@@ -5,7 +5,7 @@ import 'dart:async';
 import 'package:myrefectly/main.dart';
 import 'package:myrefectly/models/entity.dart';
 import 'package:myrefectly/repository/sync.dart';
-import 'package:myrefectly/views/login/login.dart';
+import 'package:myrefectly/authetication/login/login.dart';
 
 class NetworkService {
   // Stream để theo dõi trạng thái mạng

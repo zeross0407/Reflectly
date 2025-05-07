@@ -9,7 +9,7 @@ import 'package:myrefectly/models/entity.dart';
 import 'package:myrefectly/repository/DIOInterceptor.dart';
 import 'package:myrefectly/repository/api_service.dart';
 import 'package:myrefectly/repository/repository.dart';
-import 'package:myrefectly/views/login/login.dart';
+import 'package:myrefectly/authetication/login/login.dart';
 import 'package:restart_app/restart_app.dart';
 import 'package:uuid/uuid.dart';
 import 'dart:convert';

@@ -6,7 +6,7 @@ import 'package:mockito/annotations.dart';
 import 'package:myrefectly/models/entity.dart';
 import 'package:myrefectly/models/entry.dart';
 import 'package:myrefectly/repository/repository.dart';
-import 'package:myrefectly/views/statistical/statistical_viewmodel.dart';
+import 'package:myrefectly/statistical/statistical_viewmodel.dart';
 import 'statistical_viewmodel_test.mocks.dart';
 
 @GenerateMocks([Repository])
