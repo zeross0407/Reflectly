@@ -10,11 +10,9 @@ import 'package:myrefectly/notification/vip.dart';
 import 'package:myrefectly/views/entries/entries_viewmodel.dart';
 import 'package:myrefectly/views/start/init.dart';
 import 'package:myrefectly/repository/repository.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:myrefectly/views/navigation/navigation_viewmodel.dart';
 import 'package:provider/provider.dart';
 import 'package:uuid/uuid.dart';
-import 'firebase_options.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:myrefectly/help/color.dart';
@@ -61,7 +59,7 @@ void main() async {
       systemNavigationBarColor: Colors.black));
 
   // Khởi tạo Firebase và Notification
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  //await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await NotificationService.init();
   tz.initializeTimeZones();
 

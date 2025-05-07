@@ -38,7 +38,7 @@ class Entries_Viewmodel extends ChangeNotifier {
 
     entry_repo = Repository<String, Entry>(name: 'entry_box');
     await entry_repo.init();
-    loadData();
+    await loadData();
     notifyListeners();
   }
 

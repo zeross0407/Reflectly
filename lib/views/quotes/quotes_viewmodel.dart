@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 import 'dart:typed_data';
 import 'dart:ui' as ui;
 import 'package:dio/dio.dart';
@@ -12,7 +13,9 @@ import 'package:myrefectly/repository/api_service.dart';
 import 'package:myrefectly/repository/repository.dart';
 //import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:myrefectly/repository/sync.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:gallery_saver_plus/gallery_saver.dart';
 
 class Quote_viewmodel extends ChangeNotifier {
   bool loading = true;
@@ -175,7 +178,39 @@ class Quote_viewmodel extends ChangeNotifier {
     notifyListeners();
   }
 
+  // Future<int> SaveQuote(GlobalKey globalKey) async {
+  //   var status = await Permission.storage.status;
+  //   if (!status.isGranted) {
+  //     status = await Permission.storage.request();
+  //   }
+
+  //   if (status.isGranted) {
+  //     try {
+  //       RenderRepaintBoundary boundary = globalKey.currentContext!
+  //           .findRenderObject() as RenderRepaintBoundary;
+
+  //       ui.Image image = await boundary.toImage(pixelRatio: 3.0);
+
+  //       ByteData? byteData =
+  //           await image.toByteData(format: ui.ImageByteFormat.png);
+  //       Uint8List pngBytes = byteData!.buffer.asUint8List();
+
+  //       // final result = await ImageGallerySaver.saveImage(
+  //       //     Uint8List.fromList(pngBytes),
+  //       //     quality: 100,
+  //       //     name: uuid.v1());
+  //       // print(result);
+  //       return 1;
+  //     } catch (e) {
+  //       print("Error capturing widget: $e");
+  //     }
+  //   } else {
+  //     print("Permission denied");
+  //   }
+  //   return -1;
+  // }
   Future<int> SaveQuote(GlobalKey globalKey) async {
+    // Kiểm tra và yêu cầu quyền truy cập bộ nhớ
     var status = await Permission.storage.status;
     if (!status.isGranted) {
       status = await Permission.storage.request();
@@ -183,28 +218,45 @@ class Quote_viewmodel extends ChangeNotifier {
 
     if (status.isGranted) {
       try {
+        // Lấy hình ảnh từ RenderRepaintBoundary
         RenderRepaintBoundary boundary = globalKey.currentContext!
             .findRenderObject() as RenderRepaintBoundary;
-
         ui.Image image = await boundary.toImage(pixelRatio: 3.0);
 
+        // Chuyển đổi hình ảnh thành Uint8List
         ByteData? byteData =
             await image.toByteData(format: ui.ImageByteFormat.png);
         Uint8List pngBytes = byteData!.buffer.asUint8List();
 
-        // final result = await ImageGallerySaver.saveImage(
-        //     Uint8List.fromList(pngBytes),
-        //     quality: 100,
-        //     name: uuid.v1());
-        // print(result);
-        return 1;
+        // Lưu ảnh tạm thời vào bộ nhớ thiết bị
+        final tempDir = await getTemporaryDirectory();
+        final tempPath =
+            '${tempDir.path}/${DateTime.now().millisecondsSinceEpoch}.png';
+        final file = File(tempPath);
+        await file.writeAsBytes(pngBytes);
+
+        // Sử dụng gallery_saver_plus để lưu ảnh vào thư viện
+        final result =
+            await GallerySaver.saveImage(tempPath, albumName: 'Quotes');
+
+        // Xóa tệp tạm sau khi lưu
+        await file.delete();
+
+        if (result == true) {
+          print("Ảnh đã được lưu thành công!");
+          return 1;
+        } else {
+          print("Lưu ảnh thất bại!");
+          return -1;
+        }
       } catch (e) {
-        print("Error capturing widget: $e");
+        print("Lỗi khi chụp hoặc lưu ảnh: $e");
+        return -1;
       }
     } else {
-      print("Permission denied");
+      print("Quyền truy cập bộ nhớ bị từ chối");
+      return -1;
     }
-    return -1;
   }
 
   Future<List<QuoteRp>> get_more_quotes() async {

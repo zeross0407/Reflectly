@@ -38,50 +38,58 @@ class ReflectionShare_Viewmodel extends ChangeNotifier {
   ActionStatus actionStatus = ActionStatus.waiting;
 
   Future<void> Complete_share() async {
-    if (ref.length < 1) return;
-    uploading = await true;
+    try {
+      if (ref.length < 1) return;
+      uploading = await true;
 
-    actionStatus = ActionStatus.running;
-    notifyListeners();
+      actionStatus = ActionStatus.running;
+      notifyListeners();
 
-    var url = Uri.parse('$server_root_url/api/UserReflection/sharereflection');
+      var url =
+          Uri.parse('$server_root_url/api/UserReflection/sharereflection');
 
-    var request = http.MultipartRequest('POST', url)
-      ..fields['ReflectionId'] = reflection.id
-      ..fields['UserReflection'] =
-          reflection.description.replaceFirst('##', '#$ref#');
-    for (var file in image_list) {
-      Uint8List? webpImage = await compressIMG(file);
-      var stream = http.ByteStream.fromBytes(webpImage!);
-      var length = webpImage.length;
+      var request = http.MultipartRequest('POST', url)
+        ..fields['ReflectionId'] = reflection.id
+        ..fields['UserReflection'] =
+            reflection.description.replaceFirst('##', '#$ref#');
+      for (var file in image_list) {
+        Uint8List? webpImage = await compressIMG(file);
+        var stream = http.ByteStream.fromBytes(webpImage!);
+        var length = webpImage.length;
 
-      var multipartFile = http.MultipartFile('Files', stream, length,
-          filename: basenameWithoutExtension(file.path) + '.png');
-      request.files.add(multipartFile);
+        var multipartFile = http.MultipartFile('Files', stream, length,
+            filename: basenameWithoutExtension(file.path) + '.png');
+        request.files.add(multipartFile);
+      }
+      request.headers['Authorization'] = await 'Bearer $refresh_token';
+
+      var response = await request.send();
+
+      var responseData = await http.Response.fromStream(response);
+
+      if (response.statusCode == 200) {
+        print('Challenge completed and files uploaded.');
+        Map<String, dynamic> jsonMap = jsonDecode(responseData.body);
+        ReflectionResponse rs = ReflectionResponse.fromJson(jsonMap);
+
+        User_reflection data = await User_reflection(
+            UUID: rs.uuid,
+            reflection: rs.reflection,
+            submitTime: rs.submitTime.toLocal(),
+            photos: rs.photos,
+            reflection_id: rs.reflectionId);
+        await _repo_entry.add(data.UUID, data);
+      } else {
+        print('Failed to complete challenge: ${response.statusCode}');
+      }
+      uploading = await false;
+      actionStatus = ActionStatus.success;
+      notifyListeners();
+    } catch (e) {
+      print('Error: $e');
+      // uploading = await false;
+      // actionStatus = ActionStatus.error;
+      // notifyListeners();
     }
-    request.headers['Authorization'] = await 'Bearer $refresh_token';
-
-    var response = await request.send();
-
-    var responseData = await http.Response.fromStream(response);
-
-    if (response.statusCode == 200) {
-      print('Challenge completed and files uploaded.');
-      Map<String, dynamic> jsonMap = jsonDecode(responseData.body);
-      ReflectionResponse rs = ReflectionResponse.fromJson(jsonMap);
-
-      User_reflection data = await User_reflection(
-          UUID: rs.uuid,
-          reflection: rs.reflection,
-          submitTime: rs.submitTime.toLocal(),
-          photos: rs.photos,
-          reflection_id: rs.reflectionId);
-      await _repo_entry.add(data.UUID, data);
-    } else {
-      print('Failed to complete challenge: ${response.statusCode}');
-    }
-    uploading = await false;
-    actionStatus = ActionStatus.success;
-    notifyListeners();
   }
 }
