@@ -133,12 +133,12 @@ class Init_Viewmodel extends ChangeNotifier {
 
   Future<void> get_challenge(int number) async {
     try {
-
       final response = await http.get(
         Uri.parse(
             '${server_root_url}/api/Challenge/getchallenge?number=$number'),
         headers: {
-          'Authorization': 'Bearer ${user.refresh_token}', // Thêm token vào header
+          'Authorization':
+              'Bearer ${user.refresh_token}', // Thêm token vào header
           'Content-Type': 'application/json',
         },
       );

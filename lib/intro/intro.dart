@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:myrefectly/features/auth/pages/login_page.dart';
 import 'package:myrefectly/help/delay_animation.dart';
 import 'package:myrefectly/help/route.dart';
 import 'package:myrefectly/authetication/login/login.dart';
@@ -189,7 +190,7 @@ class _LookThroughScreenState extends State<Intro_Page>
                                 have_shadow: false,
                                 onTap: () {
                                   Navigator.push(context,
-                                      Slide_up_Route(secondPage: Login_Page()));
+                                      Slide_up_Route(secondPage: LoginPage()));
                                 },
                               ),
                             ),
@@ -500,49 +501,6 @@ class CircularClipper extends CustomClipper<Path> {
   @override
   bool shouldReclip(CustomClipper<Path> oldClipper) => true;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // class ColorSelectorScreen extends StatefulWidget {
 //   final VoidCallback? onLongPress;
