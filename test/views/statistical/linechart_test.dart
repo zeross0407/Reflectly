@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:myrefectly/views/statistical/linechart.dart';
+import 'package:myrefectly/statistical/linechart.dart';
 
 void main() {
   testWidgets('SmoothLineChart should render and update when points change',

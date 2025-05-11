@@ -5,7 +5,7 @@ import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:myrefectly/models/entity.dart';
 import 'package:myrefectly/models/entry.dart';
-import 'package:myrefectly/views/statistical/statistical_viewmodel.dart';
+import 'package:myrefectly/statistical/statistical_viewmodel.dart';
 
 import '../../statistical_viewmodel_test.mocks.dart';
 

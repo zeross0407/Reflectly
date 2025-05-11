@@ -2,15 +2,16 @@ import 'package:dio/dio.dart';
 import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:myrefectly/di/injection.dart' as di;
 import 'package:myrefectly/help/caching.dart';
 import 'package:myrefectly/models/data.dart';
 import 'package:myrefectly/models/entity.dart';
 import 'package:myrefectly/models/entry.dart';
-import 'package:myrefectly/notification/vip.dart';
-import 'package:myrefectly/views/entries/entries_viewmodel.dart';
-import 'package:myrefectly/views/start/init.dart';
+import 'package:myrefectly/notification/notification_schedule.dart';
+import 'package:myrefectly/entries/entries_viewmodel.dart';
+import 'package:myrefectly/intro/init.dart';
 import 'package:myrefectly/repository/repository.dart';
-import 'package:myrefectly/views/navigation/navigation_viewmodel.dart';
+import 'package:myrefectly/navigation/navigation_viewmodel.dart';
 import 'package:provider/provider.dart';
 import 'package:uuid/uuid.dart';
 import 'package:local_auth/local_auth.dart';
@@ -50,6 +51,9 @@ Future<void> setupDio() async {
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  // Initialize dependency injection
+  await di.init();
 
   await setupDio();
 
