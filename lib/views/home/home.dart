@@ -14,7 +14,7 @@ import 'package:myrefectly/views/challenge/dailychallange.dart';
 import 'package:myrefectly/views/share_component/reflectly_face.dart';
 import 'package:myrefectly/views/share_component/text.dart';
 import 'package:myrefectly/views/user/user.dart';
-import 'package:myrefectly/share/button.dart';
+import 'package:myrefectly/core/widget/button/core_button.dart';
 import 'package:myrefectly/share/elementshare.dart';
 import 'package:myrefectly/page_transition_animate.dart';
 import 'package:myrefectly/theme/color.dart';
@@ -324,7 +324,9 @@ class _HomePageState extends State<HomePage>
                                               weekDays[index].day)
                                             CustomElement(
                                               onTap: () async {
-                                                if(view_model.dailyChallengeCompleted)return;
+                                                if (view_model
+                                                    .dailyChallengeCompleted)
+                                                  return;
                                                 if (view_model.HomeData!
                                                             .challenge_completed[
                                                         DateTime.now().weekday -

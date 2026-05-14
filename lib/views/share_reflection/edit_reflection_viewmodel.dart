@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
+
 import 'package:myrefectly/help/enum.dart';
 import 'package:myrefectly/main.dart';
 import 'package:myrefectly/models/data.dart';
@@ -54,7 +55,7 @@ class Edit_Reflection_ViewModel extends ChangeNotifier {
           final file = File(filePath);
           await file.writeAsBytes(data);
           image_list.add(file);
-          
+
           notifyListeners();
         } else {
           print('------Failed to load image: ${response.statusCode}');

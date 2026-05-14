@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:myrefectly/share/button.dart';
+import 'package:myrefectly/core/widget/button/core_button.dart';
 import 'package:myrefectly/help/color.dart';
 import 'package:myrefectly/share/custominp.dart';
 import 'package:myrefectly/views/entries/entries_viewmodel.dart';
@@ -38,7 +38,7 @@ class VoicePageState extends State<VoicePage> {
         child: Consumer<VoiceNote_Viewmodel>(
             builder: (context, view_model, child) {
           return PopScope(
-            onPopInvokedWithResult: (didPop, result) {
+            onPopInvoked: (didPop) {
               controller.animateToPage(0,
                   duration: Duration(milliseconds: 300),
                   curve: Curves.decelerate);
@@ -267,9 +267,7 @@ class VoicePageState extends State<VoicePage> {
                             ),
                             Custom_Input(
                               onChanged: (p0) {
-                                setState(() {
-                                  
-                                });
+                                setState(() {});
                                 view_model.lastWords = p0;
                               },
                               need_helper: false,

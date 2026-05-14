@@ -2,7 +2,9 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class CustomButton extends StatefulWidget {
+import '../../animation/bouncy_anim.dart';
+
+class CoreButton extends StatefulWidget {
   final VoidCallback? onTap;
   final VoidCallback? onLongPress;
   final Function(LongPressStartDetails)? onLongPressStart;
@@ -17,8 +19,9 @@ class CustomButton extends StatefulWidget {
   final double? padding;
   final Color? icon_color;
   final double? height;
+  final bool fitWidth;
 
-  const CustomButton(
+  const CoreButton(
       {super.key,
       this.onTap,
       this.onLongPress,
@@ -33,56 +36,46 @@ class CustomButton extends StatefulWidget {
       this.max_width,
       this.padding,
       this.icon_color,
-      this.height});
+      this.height,
+      this.fitWidth = false});
 
   @override
-  CustomButtonState createState() => CustomButtonState();
+  CoreButtonState createState() => CoreButtonState();
 }
 
-class CustomButtonState extends State<CustomButton> {
+class CoreButtonState extends State<CoreButton> {
   bool is_pressing = false;
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: widget.onTap,
-      onLongPress: () {
-        setState(() {
-          is_pressing = true;
-        });
-        if (widget.onLongPress != null) widget.onLongPress!();
+    return BouncyAnimation(
+      scaleDownHold: 0.95,
+      scaleDownTap: 0.975,
+      durationDown: Duration(milliseconds: 500),
+      durationUp: Duration(milliseconds: 400),
+      duration: Duration(milliseconds: 500),
+      onTap: () {
+        widget.onTap?.call();
       },
-      onLongPressStart: widget.onLongPressStart,
-      onLongPressEnd: (detail) {
-        setState(() {
-          is_pressing = false;
-        });
-        widget.onLongPressEnd;
-      },
-      child: AnimatedScale(
-        duration: const Duration(milliseconds: 100),
-        scale: is_pressing ? 0.9 : 1.0,
-        curve: Curves.linear,
-        child: Container(
-          padding: EdgeInsets.all(widget.padding ?? 15),
-
-          // width: 270,
-          // height: 55,
-          width: widget.height ?? widget.max_width,
+      builder: (context, progress, child) {
+        return AnimatedContainer(
+          duration: Durations.long2,
+          padding: EdgeInsets.symmetric(vertical: 16),
+          width: widget.fitWidth
+              ? double.infinity
+              : widget.height ?? widget.max_width,
           height: widget.max_width,
           decoration: BoxDecoration(
               color: widget.color,
               borderRadius: BorderRadius.circular(widget.radius ?? 10000),
-              boxShadow: widget.have_shadow
-                  ? [
-                      BoxShadow(
-                        color: const Color.fromARGB(255, 141, 141, 141)
-                            .withOpacity(is_pressing ? 0 : 0.1), // Màu của bóng
-                        spreadRadius: 5, // Kích thước của bóng
-                        blurRadius: 7, // Độ mờ của bóng
-                        offset: const Offset(0, 4), // Vị trí của bóng
-                      ),
-                    ]
-                  : []),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black
+                      .withOpacity((0.05 - progress * 0.1).clamp(0, 1)),
+                  spreadRadius: 5, // Kích thước của bóng
+                  blurRadius: 7, // Độ mờ của bóng
+                  //offset: const Offset(0, 4), // Vị trí của bóng
+                ),
+              ]),
           child: Center(
             child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -101,12 +94,12 @@ class CustomButtonState extends State<CustomButton> {
                       widget.text!,
                       style: TextStyle(
                           color: widget.color_text,
-                          fontWeight: FontWeight.bold),
+                          fontWeight: FontWeight.w800),
                     ),
                 ]),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 }

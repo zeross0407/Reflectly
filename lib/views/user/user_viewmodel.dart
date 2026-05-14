@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hive/hive.dart';
 import 'package:local_auth/local_auth.dart';
+
 import 'package:myrefectly/help/compress_image.dart';
 import 'package:myrefectly/help/enum.dart';
 import 'package:myrefectly/help/image_viewer.dart';
@@ -19,6 +20,7 @@ import 'package:myrefectly/views/navigation/navigation_viewmodel.dart';
 import 'package:path/path.dart' as path;
 import 'package:provider/provider.dart';
 import 'package:restart_app/restart_app.dart';
+import 'package:uuid/uuid.dart';
 
 class User_Viewmodel extends ChangeNotifier {
   bool updating = false;
@@ -173,7 +175,7 @@ class User_Viewmodel extends ChangeNotifier {
       user.user_name = username;
       notifyListeners();
       Data_Sync_Trigger().syncDataWithServer(Data_Sync(
-          id: uuid.v1(),
+          id: Uuid().v1(),
           name: CollectionEnum.User.index,
           action: ActionEnum.Update.index,
           jsonData: username,

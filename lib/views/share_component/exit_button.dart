@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:myrefectly/share/button.dart';
+import 'package:myrefectly/core/widget/button/core_button.dart';
 
 Widget exit_button(BuildContext context, darkmode) {
   double screenWidth = MediaQuery.sizeOf(context).width;

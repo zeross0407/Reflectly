@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
-import 'package:myrefectly/share/button.dart';
+import 'package:myrefectly/core/widget/button/core_button.dart';
 
 class MockCallback extends Mock {
   void call();
@@ -26,7 +26,7 @@ void main() {
       // Arrange
       await tester.pumpWidget(
         MaterialApp(
-          home: CustomButton(
+          home: CoreButton(
             onTap: onTapMock,
             color: Colors.blue,
             color_text: Colors.white,
@@ -48,7 +48,7 @@ void main() {
       // Arrange
       await tester.pumpWidget(
         MaterialApp(
-          home: CustomButton(
+          home: CoreButton(
             onLongPress: onLongPressMock,
             color: Colors.blue,
             color_text: Colors.white,
@@ -70,7 +70,7 @@ void main() {
       // Arrange
       await tester.pumpWidget(
         MaterialApp(
-          home: CustomButton(
+          home: CoreButton(
             color: Colors.blue,
             color_text: Colors.white,
             have_shadow: true,
@@ -103,7 +103,7 @@ void main() {
       // Arrange
       await tester.pumpWidget(
         MaterialApp(
-          home: CustomButton(
+          home: CoreButton(
             color: Colors.blue,
             color_text: Colors.white,
             have_shadow: false,
@@ -122,7 +122,7 @@ void main() {
       // Arrange
       await tester.pumpWidget(
         MaterialApp(
-          home: CustomButton(
+          home: CoreButton(
             color: Colors.blue,
             color_text: Colors.white,
             have_shadow: false,
@@ -144,7 +144,7 @@ void main() {
     // Build widget with text
     await tester.pumpWidget(MaterialApp(
       home: Scaffold(
-        body: CustomButton(
+        body: CoreButton(
           text: 'Click Me',
           color: Colors.blue,
           color_text: Colors.white,
@@ -168,7 +168,7 @@ void main() {
     // Build widget with onTap callback
     await tester.pumpWidget(MaterialApp(
       home: Scaffold(
-        body: CustomButton(
+        body: CoreButton(
           text: 'Click Me',
           color: Colors.blue,
           color_text: Colors.white,
@@ -179,7 +179,7 @@ void main() {
     ));
 
     // Simulate tap on the button
-    await tester.tap(find.byType(CustomButton));
+    await tester.tap(find.byType(CoreButton));
     await tester.pump();
 
     // Verify that the onTap callback was triggered
@@ -194,7 +194,7 @@ void main() {
     // Build widget with onLongPress callback
     await tester.pumpWidget(MaterialApp(
       home: Scaffold(
-        body: CustomButton(
+        body: CoreButton(
           text: 'Long Press Me',
           color: Colors.green,
           color_text: Colors.white,
@@ -207,7 +207,7 @@ void main() {
     ));
 
     // Simulate long press on the button
-    await tester.longPress(find.byType(CustomButton));
+    await tester.longPress(find.byType(CoreButton));
     await tester.pumpAndSettle();
 
     // Verify that the onLongPress callback was triggered
@@ -219,7 +219,7 @@ void main() {
     // Build widget with icon
     await tester.pumpWidget(MaterialApp(
       home: Scaffold(
-        body: CustomButton(
+        body: CoreButton(
           icon: 'assets/all/(2).svg',
           color: Colors.blue,
           color_text: Colors.white,
@@ -237,7 +237,7 @@ void main() {
       (WidgetTester tester) async {
     // Bước 1: Xây dựng widget
     await tester.pumpWidget(MaterialApp(
-      home: CustomButton(
+      home: CoreButton(
         color: Colors.blue,
         color_text: Colors.white,
         have_shadow: true,
@@ -246,7 +246,7 @@ void main() {
     ));
 
     // Bước 2: Mô phỏng long press
-    await tester.longPress(find.byType(CustomButton));
+    await tester.longPress(find.byType(CoreButton));
 
     // Bước 4: Kiểm tra giá trị scale sau khi long press
     final animatedScale =

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:myrefectly/help/route.dart';
+import 'package:myrefectly/core/navigation/app_transitions.dart';
 import 'package:myrefectly/views/start/root_viewmodel.dart';
 import 'package:myrefectly/views/navigation/navigation.dart';
 import 'package:myrefectly/views/other/security.dart';
@@ -35,8 +35,8 @@ class _ReflectlyAppState extends State<ReflectlyApp>
       if (app_viewmodel.user.passcode)
         Navigator.push(
             context,
-            Slide_up_Route(
-                secondPage: SecurityRequest_Page(
+            AppTransitions.slideUp(
+                page: SecurityRequest_Page(
               open_app: false,
             )));
     }

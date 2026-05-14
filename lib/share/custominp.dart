@@ -101,6 +101,7 @@ class Custom_Input_State extends State<Custom_Input>
               horizontal: widget.viewing ?? false ? 0 : 10,
               vertical: widget.viewing ?? false ? 0 : 10),
           child: TextField(
+            keyboardType: TextInputType.emailAddress,
             onChanged: widget.onChanged,
             focusNode: _focusNode,
             obscureText: widget.is_password ?? false,

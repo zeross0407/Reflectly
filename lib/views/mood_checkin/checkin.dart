@@ -3,7 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:myrefectly/models/data.dart' as data;
 import 'package:myrefectly/models/data.dart';
 import 'package:myrefectly/models/entity.dart';
-import 'package:myrefectly/share/button.dart';
+import 'package:myrefectly/core/widget/button/core_button.dart';
 import 'package:myrefectly/share/custominp.dart';
 import 'package:myrefectly/page_transition_animate.dart';
 import 'package:myrefectly/theme/color.dart';
@@ -106,7 +106,7 @@ class CheckinState extends State<Checkin> {
     padding_width = screenWidth * 0.075;
     return PopScope(
         canPop: (title_typing || note_typing) ? false : true,
-        onPopInvokedWithResult: (didPop, result) {
+        onPopInvoked: (didPop) {
           setState(() {
             title_typing = false;
             note_typing = false;

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:myrefectly/help/route.dart';
+import 'package:myrefectly/core/navigation/app_transitions.dart';
 import 'package:myrefectly/notification/vip.dart';
 import 'package:myrefectly/views/start/init_viewmodel.dart';
 import 'package:myrefectly/views/start/root.dart';
@@ -27,7 +27,7 @@ class _InitPageState extends State<InitPage> {
           if (!viewModel.loading) {
             Future.microtask(
               () => Navigator.pushReplacement(
-                  context, Slide_up_Route(secondPage: ReflectlyApp())),
+                  context, AppTransitions.slideUp(page: ReflectlyApp())),
             );
           }
           return Scaffold(

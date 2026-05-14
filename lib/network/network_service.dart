@@ -2,10 +2,10 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 
-import 'package:myrefectly/main.dart';
+import 'package:myrefectly/core/navigation/app_navigator.dart';
 import 'package:myrefectly/models/entity.dart';
 import 'package:myrefectly/repository/sync.dart';
-import 'package:myrefectly/views/login/login.dart';
+import 'package:myrefectly/features/auth/presentation/widget/notification_popup.dart';
 
 class NetworkService {
   // Stream để theo dõi trạng thái mạng
@@ -29,35 +29,20 @@ class NetworkService {
               jsonData: "",
               timeStamp: DateTime.now()));
 
-          final overlayState = navigatorKey.currentState?.overlay;
-          if (overlayState == null) return;
-          final overlayEntry = OverlayEntry(
-            builder: (context) => NotificationPopup(
-              message: "Online Mode",
-              background_color: Colors.green[400],
-            ),
-          );
-          overlayState.insert(overlayEntry); //
-          Future.delayed(Duration(seconds: 3), () async {
-            overlayEntry.remove();
-          });
+          _showOverlayNotification("Online Mode", Colors.green[400]);
         } else {
           print("Không có kết nối mạng");
-
-          final overlayState = navigatorKey.currentState?.overlay;
-          if (overlayState == null) return;
-          final overlayEntry = OverlayEntry(
-            builder: (context) => NotificationPopup(
-              message: "Offline Mode",
-            ),
-          );
-          overlayState.insert(overlayEntry); //
-          Future.delayed(Duration(seconds: 3), () async {
-            overlayEntry.remove();
-          });
+          _showOverlayNotification("Offline Mode", Colors.red[300]);
         }
       }
     });
+  }
+
+  /// Shows a notification overlay using the global navigator key.
+  void _showOverlayNotification(String message, Color? color) {
+    final context = AppNavigator.navigatorKey.currentContext;
+    if (context == null) return;
+    showNotificationPopup(context, message, color);
   }
 
   void stopMonitoring() {

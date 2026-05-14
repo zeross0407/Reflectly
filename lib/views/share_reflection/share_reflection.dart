@@ -4,7 +4,7 @@ import 'package:myrefectly/help/color.dart';
 import 'package:myrefectly/help/enum.dart';
 import 'package:myrefectly/models/data.dart';
 import 'package:myrefectly/models/entity.dart';
-import 'package:myrefectly/share/button.dart';
+import 'package:myrefectly/core/widget/button/core_button.dart';
 import 'package:myrefectly/views/other/image_picker.dart';
 import 'package:myrefectly/views/share_component/custom_loading.dart';
 import 'package:myrefectly/views/share_reflection/reflectionshare_viewmodel.dart';

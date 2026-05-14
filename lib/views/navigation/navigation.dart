@@ -13,7 +13,7 @@ import 'package:myrefectly/views/home/home.dart';
 import 'package:myrefectly/views/share_component/custom_loading.dart';
 import 'package:myrefectly/views/statistical/statistical.dart';
 import 'package:myrefectly/views/voice_note/voice.dart';
-import 'package:myrefectly/share/button.dart';
+import 'package:myrefectly/core/widget/button/core_button.dart';
 import 'package:myrefectly/theme/color.dart';
 import 'package:myrefectly/views/navigation/navigation_viewmodel.dart';
 import 'package:provider/provider.dart';

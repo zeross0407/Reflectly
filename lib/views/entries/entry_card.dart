@@ -8,7 +8,7 @@ import 'package:myrefectly/models/entity.dart';
 import 'package:myrefectly/models/entry.dart';
 import 'package:myrefectly/repository/repository.dart';
 import 'package:myrefectly/repository/sync.dart';
-import 'package:myrefectly/share/button.dart';
+import 'package:myrefectly/core/widget/button/core_button.dart';
 import 'package:myrefectly/theme/color.dart';
 import 'package:myrefectly/views/entries/entries_viewmodel.dart';
 import 'package:myrefectly/views/navigation/navigation_viewmodel.dart';

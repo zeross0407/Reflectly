@@ -5,6 +5,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
+
 import 'package:myrefectly/main.dart';
 import 'package:myrefectly/models/data.dart';
 import 'package:myrefectly/models/entity.dart';
@@ -13,6 +14,7 @@ import 'package:myrefectly/repository/repository.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:myrefectly/repository/sync.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:uuid/uuid.dart';
 
 class Quote_viewmodel extends ChangeNotifier {
   bool loading = true;
@@ -31,7 +33,7 @@ class Quote_viewmodel extends ChangeNotifier {
     if (user.quote_hearted.contains(quote_id)) {
       user.quote_hearted.remove(quote_id);
       Data_Sync_Trigger().syncDataWithServer(Data_Sync(
-          id: uuid.v1(),
+          id: Uuid().v1(),
           name: CollectionEnum.Heart.index,
           action: ActionEnum.Delete.index,
           jsonData: (quote_id),
@@ -39,7 +41,7 @@ class Quote_viewmodel extends ChangeNotifier {
     } else {
       user.quote_hearted.add(quote_id);
       Data_Sync_Trigger().syncDataWithServer(Data_Sync(
-          id: uuid.v1(),
+          id: Uuid().v1(),
           name: CollectionEnum.Heart.index,
           action: ActionEnum.Create.index,
           jsonData: (quote_id),
@@ -195,7 +197,7 @@ class Quote_viewmodel extends ChangeNotifier {
         final result = await ImageGallerySaver.saveImage(
             Uint8List.fromList(pngBytes),
             quality: 100,
-            name: uuid.v1());
+            name: Uuid().v1());
         print(result);
         return 1;
       } catch (e) {

@@ -31,22 +31,16 @@ dependencies:
   flutter:
     sdk: flutter
 
-
-
-  # The following adds the Cupertino Icons font to your application.
-  # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.6
   flutter_svg: ^2.0.10+1
   flutter_custom_clippers: ^2.1.0
-  firebase_core: ^3.6.0
-  cloud_firestore: ^5.4.4
   getwidget: ^4.0.0
   flutter_staggered_grid_view: ^0.7.0
   fl_chart: ^0.69.0
   syncfusion_flutter_charts: ^27.1.56
   flare_flutter: ^3.0.2
   rive: ^0.13.4
-  flutter_slidable: ^3.1.1
+  flutter_slidable: 3.1.2
   rect_getter: ^1.1.0
   flutter_screenutil: ^5.9.3
   provider: ^6.1.2
@@ -58,7 +52,7 @@ dependencies:
   path_provider: ^2.1.0
   hive_flutter: ^1.1.0
   image_picker: ^1.1.2
-  hive_generator: ^2.0.1
+  # ĐÃ XÓA hive_generator Ở ĐÂY VÀ CHUYỂN XUỐNG DEV_DEPENDENCIES
   implicitly_animated_reorderable_list: ^0.4.2
   speech_to_text: ^7.0.0
   json_annotation: ^4.8.0
@@ -73,11 +67,6 @@ dependencies:
   calendar_date_picker2: ^1.1.7
   flutter_local_notifications: ^17.2.4
   permission_handler: ^11.3.1
-  # awesome_notifications: ^0.10.0
-  #   # Awesome plugins for local notifications
-  # awesome_notifications_core: ^0.10.0 # use the latest core version available
-  # # Awesome plugins for remote push notifications
-  # awesome_notifications_fcm: ^0.10.0 # This version is managed by core plugin
   timezone: any
   image_gallery_saver: ^2.0.3
   image_watermark: ^0.1.0
@@ -87,16 +76,28 @@ dependencies:
   livespeechtotext: ^1.0.9
   image: any
   dio: ^5.7.0
+  retrofit: ^4.1.0 # Hạ cấp từ 4.4.1 để đồng bộ với generator 8.x
+  freezed_annotation: ^2.4.1
+  dartz: ^0.10.1
   restart_app: ^1.3.2
   dio_cache_interceptor: ^3.5.1
-  dio_cache_interceptor_hive_store: ^4.0.0
+  dio_cache_interceptor_hive_store: 3.2.2
+  get_it: 7.2.0
+  injectable: 2.5.1
+  flutter_bloc: ^8.1.6
+  equatable: ^2.0.5
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_launcher_icons: ^0.14.1
-  build_runner: ^2.4.12
-  json_serializable: ^6.7.0
-  test: ^1.25.7
+  flutter_flavorizr: 2.2.3
+  json_serializable: ^6.6.0
+  retrofit_generator: ^8.1.0
+  injectable_generator: ^2.6.2
+  build_runner: ^2.4.6
+  freezed: ^2.4.5
+  hive_generator: ^2.0.1 
   mockito: ^5.4.4
   rename: ^2.0.1
 flutter_icons:
@@ -186,3 +187,21 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+
+# ── Flavorizr Configuration ─────────────────────────────────
+flavorizr:
+  flavors:
+    dev:
+      app:
+        name: "Reflectly Dev"
+      android:
+        applicationId: "com.opstudio.reflectly.dev"
+      ios:
+        bundleId: "com.example.myrefectly"
+    production:
+      app:
+        name: "Reflectly"
+      android:
+        applicationId: "com.opstudio.reflectly"
+      ios:
+        bundleId: "com.opstudio.reflectly"

@@ -1,0 +1,18 @@
+flavors:
+  dev:
+    app:
+      name: "Reflectly Dev"
+
+    android:
+      applicationId: "com.opstudio.reflectly.dev"
+    ios:
+      bundleId: "com.opstudio.reflectly.dev"
+
+  production:
+    app:
+      name: "Reflectly"
+
+    android:
+      applicationId: "com.opstudio.reflectly"
+    ios:
+      bundleId: "com.opstudio.reflectly"

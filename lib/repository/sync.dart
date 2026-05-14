@@ -2,6 +2,7 @@ import 'dart:isolate';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+
 import 'package:myrefectly/help/enum.dart';
 import 'package:myrefectly/main.dart';
 import 'package:myrefectly/models/data.dart';
@@ -9,7 +10,8 @@ import 'package:myrefectly/models/entity.dart';
 import 'package:myrefectly/repository/DIOInterceptor.dart';
 import 'package:myrefectly/repository/api_service.dart';
 import 'package:myrefectly/repository/repository.dart';
-import 'package:myrefectly/views/login/login.dart';
+import 'package:myrefectly/core/navigation/app_navigator.dart';
+import 'package:myrefectly/features/auth/presentation/widget/notification_popup.dart';
 import 'package:restart_app/restart_app.dart';
 import 'package:uuid/uuid.dart';
 import 'dart:convert';
@@ -57,7 +59,7 @@ class Data_Sync_Trigger {
     _user_repo = await Repository<String, User>(name: 'user_box');
     await _user_repo.init();
     user = await _user_repo.getAt(0);
-    _isDataInitialized = true; 
+    _isDataInitialized = true;
   }
 
   Future<void> syncDataWithServer(Data_Sync data) async {
@@ -154,29 +156,14 @@ class New_Token {
 }
 
 Future<void> force_log_out() async {
-  final overlayState =
-      navigatorKey.currentState?.overlay; // Lấy OverlayState từ navigatorKey
-  if (overlayState == null) return; // Kiểm tra overlay tồn tại
+  final context = AppNavigator.navigatorKey.currentContext;
+  if (context != null) {
+    showNotificationPopup(context, 'You are logging in other device');
+  }
 
-  final overlayEntry = OverlayEntry(
-    builder: (context) =>
-        NotificationPopup(message: "You are logging in other device"),
-  );
-
-  overlayState.insert(overlayEntry); // Thêm notification vào overlay
-  // User user;
-  // Repository<String, User> _user_repo;
-  // _user_repo = await Repository<String, User>(name: 'user_box');
-  // await _user_repo.init();
-  // user = await _user_repo.getAt(0);
-  // user.access_token = "";
-  // user.refresh_token = "";
-  // user.save();
   await Hive.deleteFromDisk();
 
-  // Xóa popup sau 5 giây
   Future.delayed(Duration(seconds: 3), () async {
-    overlayEntry.remove();
     Restart.restartApp();
   });
 }

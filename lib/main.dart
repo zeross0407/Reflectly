@@ -1,6 +1,10 @@
+import 'dart:ui';
+
 import 'package:dio/dio.dart';
 import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/physics.dart';
 import 'package:flutter/services.dart';
 import 'package:myrefectly/help/caching.dart';
 import 'package:myrefectly/models/data.dart';
@@ -10,7 +14,6 @@ import 'package:myrefectly/notification/vip.dart';
 import 'package:myrefectly/views/entries/entries_viewmodel.dart';
 import 'package:myrefectly/views/start/init.dart';
 import 'package:myrefectly/repository/repository.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:myrefectly/views/navigation/navigation_viewmodel.dart';
 import 'package:provider/provider.dart';
 import 'package:uuid/uuid.dart';
@@ -20,9 +23,14 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:myrefectly/help/color.dart';
 import 'package:timezone/data/latest.dart' as tz;
 
+// ── New Navigation System ──────────────────────────────────
+import 'package:myrefectly/core/navigation/navigation.dart';
+
+// ── Dependency Injection ───────────────────────────────────
+import 'package:myrefectly/core/di/injection.dart';
+
 final LocalAuthentication auth = LocalAuthentication();
 var uuid = Uuid();
-final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 bool force_reset = false;
 String refresh_token = "";
 String access_token = "";
@@ -53,6 +61,9 @@ Future<void> setupDio() async {
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
+  // ── Initialize Dependency Injection ──────────────────────
+  configureDependencies();
+
   await setupDio();
 
   // Cài đặt giao diện
@@ -61,7 +72,7 @@ void main() async {
       systemNavigationBarColor: Colors.black));
 
   // Khởi tạo Firebase và Notification
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  // await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await NotificationService.init();
   tz.initializeTimeZones();
 
@@ -89,17 +100,7 @@ void main() async {
   Hive.registerAdapter(VoiceNoteAdapter());
   Hive.registerAdapter(UserreflectionAdapter());
   Hive.registerAdapter(PhotoAdapter());
-  // Xóa dữ liệu Hive
-  // await Hive.deleteBoxFromDisk('entry_box');
-  // await Hive.deleteBoxFromDisk('Challenge_box');
-  // await Hive.deleteBoxFromDisk('entry_sync_box');
-  // await Hive.deleteBoxFromDisk('home_box');
-  // await Hive.deleteBoxFromDisk('reflection_box');
-  // await Hive.deleteBoxFromDisk('setting_box');
-  // await Hive.deleteBoxFromDisk('user_box');
   await Hive.openBox('settings');
-
-  // Đồng bộ dữ liệu ban đầu
 
   // Lấy cài đặt người dùng từ Hive
   try {
@@ -119,11 +120,12 @@ void main() async {
         providers: [
           ChangeNotifierProvider(create: (context) => Navigation_viewmodel()),
           ChangeNotifierProvider(create: (context) => Entries_Viewmodel()),
-          //ChangeNotifierProvider(create: (context) => TimePickerNotifier()),
-          //ChangeNotifierProvider(create: (context) => HomeViewmodel()),
         ],
         child: MaterialApp(
-            navigatorKey: navigatorKey,
+            // ── New navigation system ──────────────────────
+            navigatorKey: AppNavigator.navigatorKey,
+            onGenerateRoute: AppRouter.onGenerateRoute,
+            // ───────────────────────────────────────────────
             debugShowCheckedModeBanner: false,
             theme: ThemeData(
               useMaterial3: true,

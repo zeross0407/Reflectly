@@ -122,13 +122,14 @@
 //   }
 // }
 import 'package:dio/dio.dart';
+import 'package:dio_cache_interceptor_hive_store/dio_cache_interceptor_hive_store.dart';
 import 'package:flutter/material.dart';
+
 import 'package:myrefectly/help/caching.dart';
 import 'package:myrefectly/help/effect.dart';
 import 'package:myrefectly/main.dart';
 import 'package:myrefectly/models/data.dart';
 import 'dart:typed_data';
-
 
 class ImageFromApi extends StatefulWidget {
   final bool? need_loading_effect;
@@ -240,7 +241,7 @@ class _ImageFromApiState extends State<ImageFromApi>
       } else if (response.statusCode == 304) {
         //final directory = await getTemporaryDirectory();
         //final cacheStore = cacheStore;
-        //HiveCacheStore('${directory.path}/dio_cache');
+
         final cachedResponse = await cacheStore.get(caching_key[
                 (server_root_url) +
                     (widget.url ?? '/api/Account/media/avatar.png')] ??

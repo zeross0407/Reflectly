@@ -9,7 +9,7 @@ import 'package:myrefectly/views/entries/entry_card.dart';
 import 'package:myrefectly/views/entries/entry_header.dart';
 import 'package:myrefectly/views/user/user.dart';
 import 'package:myrefectly/repository/repository.dart';
-import 'package:myrefectly/share/button.dart';
+import 'package:myrefectly/core/widget/button/core_button.dart';
 import 'package:myrefectly/views/entries/entries_viewmodel.dart';
 import 'package:myrefectly/views/navigation/navigation_viewmodel.dart';
 import 'package:provider/provider.dart';
@@ -98,16 +98,15 @@ class _EntriesPageState extends State<EntriesPage>
     double screenHeight = MediaQuery.sizeOf(context).height;
     padding_width = screenWidth * 0.06;
     return Consumer<Entries_Viewmodel>(
-      builder: (BuildContext context, Entries_Viewmodel view_model,
-          Widget? child) {
+      builder:
+          (BuildContext context, Entries_Viewmodel view_model, Widget? child) {
         return view_model.isLoading == false
             ? Scaffold(
                 backgroundColor:
                     is_darkmode ? background_dark : background_light,
                 body: ListView.builder(
                   cacheExtent: 2000,
-                  padding:
-                      EdgeInsets.symmetric(vertical: screenHeight * 0.08),
+                  padding: EdgeInsets.symmetric(vertical: screenHeight * 0.08),
                   controller: _scrollController,
                   itemCount: view_model.entryPoints.length + 2,
                   itemBuilder: (context, index) {
@@ -146,8 +145,7 @@ class _EntriesPageState extends State<EntriesPage>
                                             borderRadius:
                                                 BorderRadius.circular(16),
                                             color: is_darkmode
-                                                ? Colors.white
-                                                    .withOpacity(0.05)
+                                                ? Colors.white.withOpacity(0.05)
                                                 : Colors.black
                                                     .withOpacity(0.02),
                                           ),

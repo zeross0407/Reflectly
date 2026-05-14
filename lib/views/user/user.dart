@@ -9,11 +9,11 @@ import 'package:myrefectly/help/route.dart';
 import 'package:myrefectly/models/data.dart';
 import 'package:myrefectly/models/entity.dart';
 import 'package:myrefectly/views/archive/archive.dart';
-import 'package:myrefectly/share/button.dart';
+import 'package:myrefectly/core/widget/button/core_button.dart';
 import 'package:myrefectly/share/custominp.dart';
 import 'package:myrefectly/theme/color.dart';
 import 'package:myrefectly/views/navigation/navigation_viewmodel.dart';
-import 'package:myrefectly/views/login/login.dart';
+
 import 'package:myrefectly/views/other/notification.dart';
 import 'package:myrefectly/views/share_component/custom_loading.dart';
 import 'package:myrefectly/views/share_component/text.dart';
@@ -544,10 +544,10 @@ class UserPageState extends State<UserPage> {
                                     int rs =
                                         await view_model.request_export_entry();
                                     if (rs == 1) {
-                                      showNotification(
-                                          context,
-                                          "Your request was sent, Your journey will be ready soon",
-                                          Colors.green[400]);
+                                      // showNotification(
+                                      //     context,
+                                      //     "Your request was sent, Your journey will be ready soon",
+                                      //     Colors.green[400]);
                                     }
                                   },
                                   child: Text(

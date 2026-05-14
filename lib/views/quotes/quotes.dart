@@ -7,7 +7,7 @@ import 'package:myrefectly/help/route.dart';
 import 'package:myrefectly/models/data.dart';
 import 'package:myrefectly/views/other/notification.dart';
 import 'package:myrefectly/views/quotes/category.dart';
-import 'package:myrefectly/share/button.dart';
+import 'package:myrefectly/core/widget/button/core_button.dart';
 import 'package:myrefectly/theme/color.dart';
 import 'package:myrefectly/views/navigation/navigation_viewmodel.dart';
 import 'package:myrefectly/views/quotes/quotes_viewmodel.dart';
@@ -94,9 +94,7 @@ class _QuotePageState extends State<QuotePage>
                                 "Quote save successfully",
                                 Colors.green[300] as Color);
                           } else {
-                            show_notification(
-                                context,
-                                "Quote save failed",
+                            show_notification(context, "Quote save failed",
                                 Colors.red[300] as Color);
                           }
                         },

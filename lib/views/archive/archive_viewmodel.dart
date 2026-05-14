@@ -4,6 +4,7 @@ import 'package:myrefectly/main.dart';
 import 'package:myrefectly/models/entity.dart';
 import 'package:myrefectly/repository/repository.dart';
 import 'package:myrefectly/repository/sync.dart';
+import 'package:uuid/uuid.dart';
 
 class Archive_Viewmodel<T> extends ChangeNotifier {
   late Repository<String, T> _activity_repo;
@@ -69,7 +70,7 @@ class Archive_Viewmodel<T> extends ChangeNotifier {
     await filt_data();
 
     Data_Sync_Trigger().syncDataWithServer(Data_Sync(
-        id: uuid.v1(),
+        id: Uuid().v1(),
         name: item is Activity
             ? CollectionEnum.Activity.index
             : CollectionEnum.Feeling.index,

@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:myrefectly/help/delay_animation.dart';
-import 'package:myrefectly/help/route.dart';
-import 'package:myrefectly/views/login/login.dart';
-import 'package:myrefectly/views/login/register.dart';
-import 'package:myrefectly/share/button.dart';
+import 'package:myrefectly/core/navigation/navigation.dart';
+import 'package:myrefectly/core/widget/button/core_button.dart';
 import 'package:myrefectly/share/custominp.dart';
 import 'package:myrefectly/views/share_component/reflectly_face.dart';
 import 'package:myrefectly/help/color.dart';
 import 'package:myrefectly/views/share_component/text.dart';
 import 'package:myrefectly/views/start/intro_viewmodel.dart';
 import 'package:provider/provider.dart';
+
+import '../../core/widget/button/core_non_background_button.dart';
 
 class Intro_Page extends StatefulWidget {
   const Intro_Page({super.key});
@@ -154,13 +154,14 @@ class _LookThroughScreenState extends State<Intro_Page>
                           ),
                           Expanded(child: Container()),
                           Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 50),
+                            padding: const EdgeInsets.symmetric(horizontal: 24),
                             child: DelayAnimation(
                               delay: 3000,
                               shouldFaded: false,
                               is_faded_animation: false,
                               sliding: false,
-                              child: CustomButton(
+                              child: CoreButton(
+                                fitWidth: true,
                                 onTap: () {
                                   _tabController.animateTo(1);
                                   setState(() {
@@ -182,14 +183,12 @@ class _LookThroughScreenState extends State<Intro_Page>
                               shouldFaded: false,
                               is_faded_animation: false,
                               sliding: false,
-                              child: CustomButton(
+                              child: CoreNonBackgroundButton(
                                 text: "I ALREADY HAVE AN ACCOUNT",
-                                color: Colors.transparent,
                                 color_text: Colors.white,
-                                have_shadow: false,
                                 onTap: () {
-                                  Navigator.push(context,
-                                      Slide_up_Route(secondPage: Login_Page()));
+                                  Navigator.pushNamed(
+                                      context, AppRoutes.login);
                                 },
                               ),
                             ),
@@ -197,7 +196,6 @@ class _LookThroughScreenState extends State<Intro_Page>
                         ],
                       ),
                       Column(children: [
-                        //Expanded(child: SizedBox()),
                         Padding(
                           padding: EdgeInsets.only(
                               left: screenWidth * 0.1,
@@ -218,6 +216,7 @@ class _LookThroughScreenState extends State<Intro_Page>
                           padding: EdgeInsets.symmetric(
                               horizontal: screenWidth * 0.05),
                           child: Custom_Input(
+                            need_focus: false,
                             limit: 40,
                             hint: "Your nickname ...",
                             fontsize: screenWidth * 0.04,
@@ -236,7 +235,7 @@ class _LookThroughScreenState extends State<Intro_Page>
                               left: screenWidth * 0.15,
                               right: screenWidth * 0.15,
                               bottom: screenHeight * 0.05),
-                          child: CustomButton(
+                          child: CoreButton(
                             onTap: () {
                               step = 2;
                               _tabController.animateTo(step);
@@ -376,7 +375,7 @@ class _LookThroughScreenState extends State<Intro_Page>
                               left: screenWidth * 0.15,
                               right: screenWidth * 0.15,
                               bottom: screenHeight * 0.05),
-                          child: CustomButton(
+                          child: CoreButton(
                             onTap: () {
                               _tabController.animateTo(3);
                             },
@@ -423,14 +422,13 @@ class _LookThroughScreenState extends State<Intro_Page>
                               left: screenWidth * 0.15,
                               right: screenWidth * 0.15,
                               bottom: screenHeight * 0.05),
-                          child: CustomButton(
+                          child: CoreButton(
                             onTap: () async {
-                              Navigator.push(
+                              Navigator.pushNamed(
                                   context,
-                                  Slide_up_Route(
-                                      secondPage: Register_Page(
-                                    username: view_model.user?.user_name ?? "",
-                                  )));
+                                  AppRoutes.register,
+                                  arguments:
+                                      view_model.user?.user_name ?? '');
                             },
                             color: Colors.white,
                             color_text: all_color[theme_selected][0],

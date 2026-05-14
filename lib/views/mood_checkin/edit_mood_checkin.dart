@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:myrefectly/help/color.dart';
 import 'package:myrefectly/models/data.dart';
-import 'package:myrefectly/share/button.dart';
+import 'package:myrefectly/core/widget/button/core_button.dart';
 import 'package:myrefectly/share/custominp.dart';
 import 'package:myrefectly/theme/color.dart';
-import 'package:myrefectly/views/login/login.dart';
+
 import 'package:myrefectly/views/mood_checkin/datetime_picker.dart';
 import 'package:myrefectly/views/mood_checkin/edit_mood_checkin_viewmodel.dart';
 import 'package:myrefectly/views/share_component/exit_button.dart';
@@ -655,19 +655,19 @@ class Edit_Mood_Checkin_State extends State<Edit_Mood_Checkin> {
                         if (editing) {
                           view_model.submit_update().then(
                             (value) {
-                              final overlay = Overlay.of(context);
-                              final overlayEntry = OverlayEntry(
-                                builder: (context) => NotificationPopup(
-                                    background_color: Colors.green[300],
-                                    message: value ? "Edit Success" : "Fail"),
-                              );
+                              // final overlay = Overlay.of(context);
+                              // final overlayEntry = OverlayEntry(
+                              //   builder: (context) => NotificationPopup(
+                              //       background_color: Colors.green[300],
+                              //       message: value ? "Edit Success" : "Fail"),
+                              // );
 
-                              overlay.insert(overlayEntry);
+                              // overlay.insert(overlayEntry);
 
-                              // Xóa popup sau 2 giây
-                              Future.delayed(Duration(seconds: 5), () {
-                                overlayEntry.remove();
-                              });
+                              // // Xóa popup sau 2 giây
+                              // Future.delayed(Duration(seconds: 5), () {
+                              //   overlayEntry.remove();
+                              // });
                             },
                           );
                         }

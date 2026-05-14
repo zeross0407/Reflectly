@@ -16,6 +16,7 @@ import 'package:myrefectly/views/entries/entries_viewmodel.dart';
 // Để lấy tên file
 import 'package:path/path.dart' as path;
 import 'package:provider/provider.dart';
+import 'package:uuid/uuid.dart';
 
 class Navigation_viewmodel extends ChangeNotifier {
   int page = 0;
@@ -74,7 +75,7 @@ class Navigation_viewmodel extends ChangeNotifier {
 
       if (webpImage != null) {
         try {
-          String newId = uuid.v1();
+          String newId = Uuid().v1();
 
           final formData = FormData.fromMap({
             'photo': newId,
@@ -121,7 +122,5 @@ class Navigation_viewmodel extends ChangeNotifier {
 
     uploading = false;
     notifyListeners();
-
-
   }
 }
